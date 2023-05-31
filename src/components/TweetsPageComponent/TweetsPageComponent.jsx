@@ -6,11 +6,12 @@ import { StyledLink, Box, Btn } from './TweetsPageComponent.styled';
 import Filter from '../Filter/Filter';
 
 const LIMIT = 3;
+const TOTAL = 12;
 
 const fetchUsers = async (page = 1) => {
   try {
     const response = await axios.get(
-      `https://637929d37419b414df8b4256.mockapi.io/example/users?page=${page}limit=${LIMIT}`
+      `https://637929d37419b414df8b4256.mockapi.io/example/users?page=${page}&limit=${LIMIT}`
     );
     return response.data;
   } catch (error) {
@@ -44,6 +45,25 @@ const TweetsPageComponent = () => {
     };
     getUsers();
   }, []);
+
+  useEffect(() => {
+    if (page === 1) {
+      return;
+    }
+    const getUsers = async () => {
+      try {
+        const result = await fetchUsers(page);
+        console.log('page 56', page);
+        const addValueIsFollowing = result.map((el) => {
+          return { ...el, isFollowing: false };
+        });
+        setUsers((users) => [...users, ...addValueIsFollowing]);
+      } catch (error) {
+        Notify.failure(`${error.message}`);
+      }
+    };
+    getUsers();
+  }, [page]);
 
   const changeFilterState = (value) => {
     setFilterState(value);
@@ -89,11 +109,11 @@ const TweetsPageComponent = () => {
         <Filter filterState={filterState} onChange={changeFilterState} />
       </Box>
       <ListOfTweets userList={visibilitedListUsers()} onClick={handleClick} />
-      {
+      {users.length < TOTAL && (
         <Btn type='button' onClick={() => setPage(page + 1)}>
           Load more
         </Btn>
-      }
+      )}
     </>
   );
 };

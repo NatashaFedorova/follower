@@ -1,10 +1,12 @@
 import styled from 'styled-components';
+import { DefaultButton } from '../../constants/componentsDefaultStyle';
 
 export const List = styled.ul`
   display: flex;
   gap: 15px;
   flex-wrap: wrap;
   justify-content: center;
+  margin-bottom: 40px;
 `;
 
 export const Item = styled.li`
@@ -69,22 +71,7 @@ export const Info = styled.div`
 
 export const Text = styled.p``;
 
-export const Button = styled.button`
-  display: block;
-  cursor: pointer;
-  width: 196px;
-  height: 50px;
+export const Button = styled(DefaultButton)`
   margin: 0 auto;
   background-color: ${(props) => (props.isFollowing ? '#5cd3a8' : '#ebd8ff')};
-  box-shadow: 0px 3.43693px 3.43693px rgba(0, 0, 0, 0.25);
-  border: none;
-  border-radius: 10px;
-  text-transform: uppercase;
-  color: #373737;
-  transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
-
-  &:hover,
-  &:focus {
-    transform: scale(1.1);
-  }
 `;

@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import { DefaultButton } from '../../constants/componentsDefaultStyle';
 
 export const StyledLink = styled(Link)`
   color: #471ca9;
@@ -19,6 +20,13 @@ export const Box = styled.div`
   margin-bottom: 40px;
 `;
 
-export const Btn = styled.button``;
+export const Btn = styled(DefaultButton)`
+  margin: 0 auto;
+  background-color: #ebd8ff;
 
-
+  &:hover,
+  &:focus {
+    transform: scale(1.1);
+    background-color: #5cd3a8;
+  }
+`;
