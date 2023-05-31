@@ -53,7 +53,6 @@ const TweetsPageComponent = () => {
     const getUsers = async () => {
       try {
         const result = await fetchUsers(page);
-        console.log('page 56', page);
         const addValueIsFollowing = result.map((el) => {
           return { ...el, isFollowing: false };
         });
